@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 
 function ProtectedRoute({ children }: any) {
-    const [isAuthorized, setIsAuthorized] = useState(Boolean);
+    const [isAuthorized, setIsAuthorized] = useState(true);
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false))
@@ -50,7 +50,7 @@ function ProtectedRoute({ children }: any) {
     if (isAuthorized === null) {
         return <div>Loading...</div>;
     }
-    console.log(isAuthorized)
+
     return isAuthorized ? children : <Navigate to="/login" />;
 }
 
