@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react"
-import api from "../api"
+import { useState, useEffect } from "react";
+import api from "../api";
+import Note from "../components/Note"
+import INote from "../interfaces/INote";
 import { data } from "react-router";
 
 function Home() {
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState<INote[]>([]);
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
 
@@ -14,7 +16,7 @@ function Home() {
     const getNotes = () => {
         api.get("/api/notes/")
         .then((res) => res.data)
-        .then((data) => {setNotes(data); console.log(data)})
+        .then((data) => {setNotes(data)})
         .catch((error) => alert(error));
     };
 
@@ -34,12 +36,15 @@ function Home() {
             if(res.status === 201) alert("Note created!")
             else alert("Failed to create note.")
             getNotes();
-        }).catch((err) => alert(err))
+        }).catch((err) => alert(err)) 
     };
 
     return <div>
         <div>
             <h2>Notes</h2>
+            {notes.map((note) => (
+                <Note note={note} onDelete={deleteNote} key={note.id}/>
+            ))}
         </div>
         <h2>Create a Note</h2>
         <form onSubmit={createNote}>

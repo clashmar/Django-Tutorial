@@ -1,8 +1,8 @@
-import React from "react";
+import INote from "../interfaces/INote";
 
-function Note({note, onDelete}: {note: any, onDelete: Function}) {
+function Note({note, onDelete}: {note: INote, onDelete: Function}) {
     const formattedDate = new Date(note.created_at).toLocaleDateString("en-UK")
-    
+
     return <div className="=note-container">
         <p className="note-title">{note.title}</p>
         <p className="note-content">{note.content}</p>
@@ -12,3 +12,5 @@ function Note({note, onDelete}: {note: any, onDelete: Function}) {
         </button>
     </div>
 }
+
+export default Note
