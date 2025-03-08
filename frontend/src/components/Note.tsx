@@ -1,4 +1,5 @@
 import INote from "../interfaces/INote";
+import "../styles/Note.css"
 
 function Note({note, onDelete}: {note: INote, onDelete: Function}) {
     const formattedDate = new Date(note.created_at).toLocaleDateString("en-UK")
